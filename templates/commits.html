@@ -32,7 +32,7 @@
             $.getJSON('https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits', function(data) {
                 data.forEach(function(commit) {
                     var date = commit.commit.author.date;
-                    $.getJSON('https://elie00000.alwaysdata.net/extract-minutes/' + date, function(minutesData) {
+                    $.getJSON('https://api.github.com/repos/Elie00000/Partiel/commits' + date, function(minutesData) {
                         $('#commit-table').append('<tr><td>' + date + '</td><td>' + minutesData.minutes + '</td></tr>');
                     });
                 });
