@@ -9,20 +9,25 @@
 <body>
     <canvas id="commitsChart" width="800" height="400"></canvas>
     <script>
+        // Récupération des données de commits
         fetch('https://api.github.com/repos/Elie00000/Partiel/commits')
             .then(response => response.json())
             .then(data => {
+                // Extraction des minutes de chaque commit
                 const commitMinutes = data.map(commit => {
                     const commitDate = new Date(commit.commit.author.date);
                     return commitDate.getMinutes();
                 });
 
+                // Initialisation du compteur de minutes
                 const minuteCounts = Array.from({length: 60}, () => 0);
 
+                // Comptage des commits par minute
                 commitMinutes.forEach(minute => {
                     minuteCounts[minute]++;
                 });
 
+                // Création du graphique
                 const ctx = document.getElementById('commitsChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'bar',
