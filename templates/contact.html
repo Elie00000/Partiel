@@ -38,7 +38,7 @@
         .form-group input, .form-group textarea, .form-group select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: none; /* Suppression de la bordure */
             border-radius: 5px;
         }
         button {
@@ -58,12 +58,8 @@
         <h1>Contactez-moi</h1>
         <form>
             <div class="form-group">
-                <label for="firstName">Nom</label>
+                <label for="firstName">Ton nom</label>
                 <input type="text" id="firstName" name="firstName" required>
-            </div>
-            <div class="form-group">
-                <label for="LastName">Prénom</label>
-                <input type="text" id="LastName" name="LastName" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
@@ -71,7 +67,7 @@
             </div>
             <div class="form-group">
                 <label for="message">Message</label>
-                <textarea id="message" name="message" rows="5" required>Your message here...</textarea>
+                <textarea id="message" name="message" rows="5" required>Ton message ici ...</textarea>
             </div>
             <button type="submit">Envoyer</button>
         </form>
