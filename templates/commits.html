@@ -3,42 +3,39 @@
 <head>
     <title>Commits</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
     <h1>Informations sur les commits</h1>
-    <table id="commit-table">
-        <tr>
-            <th>Date</th>
-            <th>Minute</th>
-        </tr>
-    </table>
+    <div id="chart_div"></div>
 
     <script>
-        $(document).ready(function() {
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var dataTable = new google.visualization.DataTable();
+            dataTable.addColumn('string', 'Date');
+            dataTable.addColumn('number', 'Minute');
+
             $.getJSON('https://api.github.com/repos/Elie00000/Partiel/commits', function(data) {
                 data.forEach(function(commit) {
                     var date = commit.commit.author.date;
                     $.getJSON('/extract-minutes/' + date, function(minutesData) {
-                        $('#commit-table').append('<tr><td>' + date + '</td><td>' + minutesData.minutes + '</td></tr>');
+                        dataTable.addRow([date, minutesData.minutes]);
                     });
                 });
+
+                var options = {
+                    title: 'Quantité de commits par minute',
+                    curveType: 'function',
+                    legend: { position: 'bottom' }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                chart.draw(dataTable, options);
             });
-        });
+        }
     </script>
 </body>
 </html>
-
