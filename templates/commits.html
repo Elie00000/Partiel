@@ -36,9 +36,11 @@
                         datasets: [{
                             label: 'Commits par minute',
                             data: minuteCounts,
-                            backgroundColor: 'rgba(120, 200, 50, 0.2)',
-                            borderColor: 'rgba(120, 200, 50, 1)',
-                            borderWidth: 1
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Couleur de fond plus attrayante
+                            borderColor: 'rgba(75, 192, 192, 1)', // Couleur de bordure plus attrayante
+                            borderWidth: 1,
+                            hoverBackgroundColor: 'rgba(75, 192, 192, 0.4)', // Couleur de survol
+                            hoverBorderColor: 'rgba(75, 192, 192, 1)' // Couleur de bordure au survol
                         }]
                     },
                     options: {
@@ -48,6 +50,24 @@
                                     beginAtZero: true
                                 }
                             }]
+                        },
+                        animation: {
+                            duration: 2000, // Durée de l'animation
+                            easing: 'easeInOutBounce' // Type d'animation
+                        },
+                        layout: {
+                            padding: {
+                                left: 50,
+                                right: 50,
+                                top: 50,
+                                bottom: 50
+                            }
+                        },
+                        legend: {
+                            labels: {
+                                fontColor: 'rgb(255, 99, 132)', // Couleur de la légende
+                                fontSize: 16 // Taille de la légende
+                            }
                         }
                     }
                 });
